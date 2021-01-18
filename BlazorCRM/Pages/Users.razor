@@ -1,0 +1,52 @@
+﻿@page "/users"
+@using BlazorCRM.Models
+@using Microsoft.EntityFrameworkCore
+@using BlazorCRM.Services
+@inject IDbContextFactory<DataContext> DataContext
+
+<h1>Users</h1>
+<p>This component demonstrates fetching data from a service.</p>
+
+
+@if (_users == null || IsLoading)
+{
+	<p>
+		<em>Loading...</em>
+	</p>
+}
+else if (_users.Count == 0)
+{
+	<p>There is no user.</p>
+}
+else
+{
+	<div id="UserList">
+		<p>Id</p>
+		<p>Name</p>
+		<p>Surname</p>
+		<p>Phone</p>
+		<p>Email</p>
+		@foreach (var user in _users)
+		{
+			<p>@user.Id</p>
+			<p>@user.Name</p>
+			<p>@user.Surname</p>
+			<p>@user.Phones.Count</p>
+			<p>@user.Emails.Count</p>
+		}
+	</div>
+}
+
+@code {
+
+	private List<User> _users;
+	public bool IsLoading = true;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await using var context = DataContext.CreateDbContext();
+		_users = await context.Users.ToListAsync();
+		IsLoading = false;
+	}
+
+}

@@ -1,0 +1,21 @@
+﻿<div id="NavWrapper">
+	<button class="navbar-toggler" @onclick="ToggleNavMenu">@_collapseNavMenu</button>
+
+	<nav class="@NavMenuCssClass">
+		<NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+		<NavLink class="nav-link" href="users">Users</NavLink>
+		<NavLink class="nav-link" href="objectives">Objectives</NavLink>
+	</nav>
+</div>
+
+@code {
+	private bool _collapseNavMenu = false;
+
+	private string NavMenuCssClass => _collapseNavMenu ? "nav-collapse" : null;
+
+	private void ToggleNavMenu()
+	{
+		_collapseNavMenu = !_collapseNavMenu;
+	}
+
+}

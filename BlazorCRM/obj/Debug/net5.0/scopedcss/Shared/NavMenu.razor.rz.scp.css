@@ -1,0 +1,23 @@
+#NavWrapper[b-4rfxak639k] {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding: 2rem;
+    border-right:0.1rem solid #b06e35;
+}
+
+.navbar-toggler[b-4rfxak639k] {
+    border: none;
+    height: 3rem;
+    border-radius: 1.5rem;
+}
+
+nav[b-4rfxak639k] {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.nav-collapse[b-4rfxak639k] {
+    display: none;
+}

@@ -1,0 +1,23 @@
+#NavWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding: 2rem;
+    border-right:0.1rem solid #b06e35;
+}
+
+.navbar-toggler {
+    border: none;
+    height: 3rem;
+    border-radius: 1.5rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.nav-collapse {
+    display: none;
+}

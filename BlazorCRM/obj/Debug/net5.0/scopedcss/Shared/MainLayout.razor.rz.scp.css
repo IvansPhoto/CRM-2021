@@ -1,0 +1,13 @@
+#page[b-pkfdbk1gz6] {
+    display: grid;
+    grid-template-columns: 15vw 35vw;
+    align-content: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+main[b-pkfdbk1gz6] {
+    display: flex;
+    flex-direction: column;
+}
+

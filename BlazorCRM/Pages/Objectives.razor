@@ -1,0 +1,95 @@
+﻿@page "/objectives"
+@using BlazorCRM.Models
+@using BlazorCRM.Services
+@inject IObjectiveService ObjectiveService;
+@inject IUserService UserService;
+
+<h1>Objectives</h1>
+
+@if (_objectives == null || _isLoading)
+{
+	<p>Loading data...</p>
+}
+else if (_objectives.Count == 0)
+{
+	<p>There is no objectives.</p>
+}
+else
+{
+	<div id="ObjectiveList">
+		<p>Id</p>
+		<p>Title</p>
+		<p>Description</p>
+		<p>ObjectType</p>
+		<p>Responsible User</p>
+		<p>Employee <br/> Company</p>
+		<p>CreateDate</p>
+		<p>FinishDate</p>
+		<p>IsFinished</p>
+		<p>Project?</p>
+		@foreach (var user in _objectives)
+		{
+			<p>@user.Id</p>
+			<p>@user.Title</p>
+			<p>@user.Description</p>
+			<p>@user.ObjectType</p>
+			<p>@user.ResponsibleUser</p>
+			<p>
+				@user.Employee?.Name <br/> @user.Company?.Name
+			</p>
+			<p>@user.CreateDate</p>
+			<p>@user.FinishDate</p>
+			<p>@user.IsFinished</p>
+			<p>@user.Project?</p>
+		}
+	</div>
+}
+
+<form id="NewObjective">
+	<label for="Title">Title</label>
+	<input type="text" name="Title" id="Title" @bind="_newObjective.Title">
+
+	<label for="Description">Description</label>
+	<input type="text" name="Title" id="Description" @bind="_newObjective.Description">
+
+	<label for="FDate">Finish to</label>
+	<input type="date" name="FDate" id="FDate" @bind="_newObjective.FinishDate" min="2021-01-01">
+	@* <label for="ResponsibleUser">Responsible User</label> *@
+	@* <input type="text" name="number" id="ResponsibleUser" @bind="_newObjective.ResponsibleUser"> *@
+	<p>@_currentUser.Name - @_currentUser.Surname</p>
+	<button @onclick="SaveObjective">Save</button>
+</form>
+
+@if (_newObjective != null)
+{
+	<p>New Objective Title: @_newObjective.Title</p>
+	<p>New Objective Description: @_newObjective.Description</p>
+	<p>New Objective FinishDate: @_newObjective.FinishDate</p>
+}
+
+@code {
+	private bool _isLoading;
+	private List<Objective> _objectives;
+	private Objective _newObjective;
+	private User _currentUser;
+	
+	protected override async Task OnInitializedAsync()
+	{
+		_isLoading = true;
+		_newObjective = ObjectiveService.NewObjective;
+		_objectives = await ObjectiveService.GetObjectives();
+		_currentUser = await UserService.GetUser(1);
+		_isLoading = false;
+	}
+
+	private async Task SaveObjective()
+	{
+		_newObjective.ResponsibleUser = _currentUser;
+		await ObjectiveService.SaveObjective(_newObjective);
+	}
+
+	private async Task GetUser(int id)
+	{
+	}
+
+}
