@@ -7,5 +7,9 @@
 #NewObjective {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
 }

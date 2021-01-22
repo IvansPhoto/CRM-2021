@@ -17,26 +17,25 @@ namespace BlazorCRM.Services
 
 		public User? NewUser { get; set; } = new();
 
+
 		public async Task<List<User>> GetUsers()
 		{
 			await using var context = _dbContextFactory.CreateDbContext();
 			return await context.Users.ToListAsync();
 		}
 
-		public async Task<List<User>> GetUsers(int id)
-		{
-			await using var context = _dbContextFactory.CreateDbContext();
-			return await context.Users
-				.Where(user => user.Id == id)
-				.ToListAsync();
-		}
-		
-		public async Task<User?> GetUser(int id)
+		public async Task<User?> GetUser(long id)
 		{
 			await using var context = _dbContextFactory.CreateDbContext();
 			return await context.Users.FirstOrDefaultAsync(user => user.Id == id);
 		}
-		
+
+		public async ValueTask<User?> GetUserEntity(long id)
+		{
+			await using var context = _dbContextFactory.CreateDbContext();
+			return await context.Users.FindAsync(id);
+		}
+
 		public async Task<User?> SaveUsers(User user)
 		{
 			await using var context = _dbContextFactory.CreateDbContext();
@@ -48,9 +47,9 @@ namespace BlazorCRM.Services
 	public interface IUserService
 	{
 		public User? NewUser { get; set; }
-		public Task<User?> GetUser(int id);
+		public Task<User?> GetUser(long id);
+		public ValueTask<User?> GetUserEntity(long id);
 		public Task<List<User>> GetUsers();
-		public Task<List<User>> GetUsers(int id);
 		public Task<User?> SaveUsers(User user);
 	}
 }

@@ -1,6 +1,6 @@
 #page {
     display: grid;
-    grid-template-columns: 15vw 35vw;
+    grid-template-columns: 15vw 55vw;
     align-content: center;
     justify-content: center;
     gap: 3rem;

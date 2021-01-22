@@ -12,7 +12,7 @@ namespace BlazorCRM.Models
 		public bool IsFinished { get; set; } = false;
 		public DateTime StartDate { get; set; } = new();
 		public DateTime FinishDate { get; set; } = new();
-		public User ResponsibleUser { get; set; }
+		public User? ResponsibleUser { get; set; }
 		public Company? Company { get; set; }
 		public Employee? Employee { get; set; }
 

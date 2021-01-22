@@ -13,6 +13,11 @@ namespace BlazorCRM.Models
 		public List<Phone> Phones { get; set; } = new();
 		public List<Email> Emails { get; set; } = new();
 
+		public override string ToString()
+		{
+			return $"Id: {Id}, Name: {Name}, Surname: {Surname}";
+		}
+
 		public User()
 		{
 		}

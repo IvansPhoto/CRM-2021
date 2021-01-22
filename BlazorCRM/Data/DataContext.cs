@@ -1,4 +1,5 @@
 ﻿using BlazorCRM.Models;
+using BlazorCRM.Pages;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorCRM.Services
@@ -17,5 +18,17 @@ namespace BlazorCRM.Services
 		public DbSet<Project> Projects { get; set; }
 		public DbSet<Phone> Phones { get; set; }
 		public DbSet<Email> Emails { get; set; }
+		// protected override void OnModelCreating(ModelBuilder modelBuilder)
+		// {
+		// 	modelBuilder.Entity<Users>().Property("PhoneForeignKey");
+		// 	modelBuilder.Entity<Users>().Property("EmailForeignKey");
+		// 	modelBuilder.Entity<Users>().Property("CompanyForeignKey");
+		// 	modelBuilder.Entity<Users>().Property("EmployeeForeignKey");
+		// 	modelBuilder.Entity<Users>().Property("ObjForeignKey");
+		// 	modelBuilder.Entity<Users>().Property("ProjectForeignKey");
+		//
+		// 	modelBuilder.Entity<User>().HasOne(u => u.Emails);
+		// 	modelBuilder.Entity<User>().HasOne(u => u.Phones);
+		// }
 	}
 }

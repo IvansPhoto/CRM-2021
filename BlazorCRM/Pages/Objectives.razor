@@ -17,79 +17,87 @@ else if (_objectives.Count == 0)
 else
 {
 	<div id="ObjectiveList">
-		<p>Id</p>
-		<p>Title</p>
-		<p>Description</p>
-		<p>ObjectType</p>
-		<p>Responsible User</p>
-		<p>Employee <br/> Company</p>
-		<p>CreateDate</p>
-		<p>FinishDate</p>
-		<p>IsFinished</p>
-		<p>Project?</p>
-		@foreach (var user in _objectives)
+		@* <p>Id</p> *@
+		@* <p>Title</p> *@
+		@* <p>Description</p> *@
+		@* <p>ObjectType</p> *@
+		@* <p>Responsible User</p> *@
+		@* <p>Employee <br/> Company</p> *@
+		@* <p>CreateDate</p> *@
+		@* <p>FinishDate</p> *@
+		@* <p>IsFinished</p> *@
+		@* <p>Project?</p> *@
+		@foreach (var obj in _objectives)
 		{
-			<p>@user.Id</p>
-			<p>@user.Title</p>
-			<p>@user.Description</p>
-			<p>@user.ObjectType</p>
-			<p>@user.ResponsibleUser</p>
-			<p>
-				@user.Employee?.Name <br/> @user.Company?.Name
-			</p>
-			<p>@user.CreateDate</p>
-			<p>@user.FinishDate</p>
-			<p>@user.IsFinished</p>
-			<p>@user.Project?</p>
+			<p>@obj.ToString()</p>
+
+			@*<p>@obj.Id</p>
+			<p>@obj.Title</p>
+			<p>@obj.Description</p>
+			<p>@obj.ObjectType</p>
+			<p>@obj.ResponsibleUser</p>
+			<p>@obj.Employee?.Name <br/> @obj.Company?.Name</p>
+			<p>@obj.CreateDate</p>
+			<p>@obj.FinishDate</p>
+			<p>@obj.IsFinished</p>
+			<p>@obj.Project?</p>*@
 		}
 	</div>
 }
 
 <form id="NewObjective">
-	<label for="Title">Title</label>
-	<input type="text" name="Title" id="Title" @bind="_newObjective.Title">
+	<div class="form-field">
+		<label for="Title">Title</label>
+		<input type="text" name="Title" id="Title" @bind="_newObjective.Title">
+	</div>
 
-	<label for="Description">Description</label>
-	<input type="text" name="Title" id="Description" @bind="_newObjective.Description">
+	<div class="form-field">
+		<label for="Description">Description</label>
+		<input type="text" name="Title" id="Description" @bind="_newObjective.Description">
+	</div>
 
-	<label for="FDate">Finish to</label>
-	<input type="date" name="FDate" id="FDate" @bind="_newObjective.FinishDate" min="2021-01-01">
-	@* <label for="ResponsibleUser">Responsible User</label> *@
-	@* <input type="text" name="number" id="ResponsibleUser" @bind="_newObjective.ResponsibleUser"> *@
-	<p>@_currentUser.Name - @_currentUser.Surname</p>
+	<div class="form-field">
+		<label for="FDate">Finish to</label>
+		<input type="date" name="FDate" id="FDate" @bind="_newObjective.FinishDate" min="2021-01-01">
+	</div>
+
+	<div class="form-field">
+		<label for="ResponsibleUser">Responsible User</label>
+		@* <input type="text" name="number" id="ResponsibleUser" value="@_newObjective.ResponsibleUser.ToString()" disabled> *@
+		<input type="text" name="number" id="ResponsibleUser" value="@IsUser()" disabled>
+	</div>
+
 	<button @onclick="SaveObjective">Save</button>
 </form>
 
 @if (_newObjective != null)
 {
-	<p>New Objective Title: @_newObjective.Title</p>
-	<p>New Objective Description: @_newObjective.Description</p>
-	<p>New Objective FinishDate: @_newObjective.FinishDate</p>
+	<p>New Objective: <br/>@_newObjective</p>
 }
 
 @code {
 	private bool _isLoading;
 	private List<Objective> _objectives;
 	private Objective _newObjective;
-	private User _currentUser;
+
+	private string IsUser()
+	{
+		return _newObjective.ResponsibleUser == null ? "User is not set" : _newObjective.ResponsibleUser.ToString();
+	}
 	
 	protected override async Task OnInitializedAsync()
 	{
 		_isLoading = true;
-		_newObjective = ObjectiveService.NewObjective;
 		_objectives = await ObjectiveService.GetObjectives();
-		_currentUser = await UserService.GetUser(1);
+		_newObjective = ObjectiveService.NewObjective;
+		// _newObjective.ResponsibleUser = new User() {Name = "Elias - 65303E4A-B4A1-4F54-A40D-78B48AAD17D9", Surname = "Becker"};
+		_newObjective.ResponsibleUser = await UserService.GetUserEntity(1);
 		_isLoading = false;
 	}
 
-	private async Task SaveObjective()
+	private async void SaveObjective()
 	{
-		_newObjective.ResponsibleUser = _currentUser;
 		await ObjectiveService.SaveObjective(_newObjective);
-	}
-
-	private async Task GetUser(int id)
-	{
 	}
 
 }

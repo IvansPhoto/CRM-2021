@@ -23,7 +23,7 @@ namespace BlazorCRM.Services
 			return await context.Companies.ToListAsync();
 		}
 
-		public async Task<List<Company>> GetCompanies(int userId)
+		public async Task<List<Company>> GetCompanies(long userId)
 		{
 			await using var context = _dbContextFactory.CreateDbContext();
 			return await context.Companies
@@ -36,6 +36,6 @@ namespace BlazorCRM.Services
 	{
 		public Company? NewCompany  { get; set; }
 		public Task<List<Company>> GetCompanies();
-		public Task<List<Company>> GetCompanies(int userId);
+		public Task<List<Company>> GetCompanies(long userId);
 	}
 }

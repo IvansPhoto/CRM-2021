@@ -105,30 +105,30 @@ using BlazorCRM.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 70 "D:\dotNET\CRM-2021\BlazorCRM\Pages\Objectives.razor"
+#line 78 "D:\dotNET\CRM-2021\BlazorCRM\Pages\Objectives.razor"
        
 	private bool _isLoading;
 	private List<Objective> _objectives;
 	private Objective _newObjective;
-	private User _currentUser;
+
+	private string IsUser()
+	{
+		return _newObjective.ResponsibleUser == null ? "User is not set" : _newObjective.ResponsibleUser.ToString();
+	}
 	
 	protected override async Task OnInitializedAsync()
 	{
 		_isLoading = true;
-		_newObjective = ObjectiveService.NewObjective;
 		_objectives = await ObjectiveService.GetObjectives();
-		_currentUser = await UserService.GetUser(1);
+		_newObjective = ObjectiveService.NewObjective;
+		// _newObjective.ResponsibleUser = new User() {Name = "Elias - 65303E4A-B4A1-4F54-A40D-78B48AAD17D9", Surname = "Becker"};
+		_newObjective.ResponsibleUser = await UserService.GetUserEntity(1);
 		_isLoading = false;
 	}
 
-	private async Task SaveObjective()
+	private async void SaveObjective()
 	{
-		_newObjective.ResponsibleUser = _currentUser;
 		await ObjectiveService.SaveObjective(_newObjective);
-	}
-
-	private async Task GetUser(int id)
-	{
 	}
 
 
