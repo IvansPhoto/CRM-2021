@@ -8,6 +8,11 @@ namespace BlazorCRM.Models
 		public long Id { get; set; }
 		public string EmailAddress { get; set; }
 		public ContactType Type { get; set; } = ContactType.Unknown;
+
+		public Email()
+		{
+			
+		}
 		public Email(string emailAddress)
 		{
 			EmailAddress = emailAddress;

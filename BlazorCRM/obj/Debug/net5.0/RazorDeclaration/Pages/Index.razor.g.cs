@@ -93,11 +93,11 @@ using BlazorCRM.Shared;
 #nullable restore
 #line 9 "D:\dotNET\CRM-2021\BlazorCRM\Pages\Index.razor"
        
-    private int currentCount = 0;
+    private int _currentCount;
 
     private void IncrementCount()
     {
-        currentCount++;
+        _currentCount++;
     }
 
 #line default

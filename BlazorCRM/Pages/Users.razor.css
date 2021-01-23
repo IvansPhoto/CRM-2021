@@ -1,6 +1,11 @@
 ﻿#UserList {
     display: grid;
-    grid-template-columns: 3rem 10rem 10rem 4rem 4rem;
+    grid-template-columns: 3rem repeat(4, auto);
+    align-items: center;
     justify-items: center;
     gap: 1rem;
+}
+.phone-list {
+    display: flex;
+    flex-direction: column;
 }

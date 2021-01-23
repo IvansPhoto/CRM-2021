@@ -1,14 +1,13 @@
 ﻿@page "/users"
 @using BlazorCRM.Models
-@using Microsoft.EntityFrameworkCore
 @using BlazorCRM.Services
-@inject IDbContextFactory<DataContext> DataContext
+@inject IUserService UserService;
 
 <h1>Users</h1>
 <p>This component demonstrates fetching data from a service.</p>
 
 
-@if (_users == null || IsLoading)
+@if (_users == null || _isLoading)
 {
 	<p>
 		<em>Loading...</em>
@@ -31,8 +30,32 @@ else
 			<p>@user.Id</p>
 			<p>@user.Name</p>
 			<p>@user.Surname</p>
-			<p>@user.Phones.Count</p>
-			<p>@user.Emails.Count</p>
+			<div class="phone-list">
+				@if (user.Phones.Count <= 0)
+				{
+					<p>@user.Phones.Count</p>
+				}
+				else
+				{
+					@foreach (var phone in user.Phones)
+					{
+						<p>@(phone.PhoneNumber ?? "null")</p>
+					}
+				}
+			</div>
+			<div class="phone-list">
+				@if (user.Emails.Count <= 0)
+				{
+					<p>@user.Emails.Count</p>
+				}
+				else
+				{
+					@foreach (var phone in user.Emails)
+					{
+						<p>@phone.EmailAddress</p>
+					}
+				}
+			</div>
 		}
 	</div>
 }
@@ -40,13 +63,14 @@ else
 @code {
 
 	private List<User> _users;
-	public bool IsLoading = true;
+	private bool _isLoading = true;
 
 	protected override async Task OnInitializedAsync()
 	{
-		await using var context = DataContext.CreateDbContext();
-		_users = await context.Users.ToListAsync();
-		IsLoading = false;
+		_isLoading = true;
+	// _users = await UserService.GetUsers();
+		_users = await UserService.GetUsersDapper();
+		_isLoading = false;
 	}
 
 }

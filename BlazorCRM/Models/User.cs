@@ -15,7 +15,7 @@ namespace BlazorCRM.Models
 
 		public override string ToString()
 		{
-			return $"Id: {Id}, Name: {Name}, Surname: {Surname}";
+			return $"Id: {Id}, Name: {Name}, Surname: {Surname}, Phones: {Phones.Count}";
 		}
 
 		public User()

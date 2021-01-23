@@ -90,7 +90,7 @@ using BlazorCRM.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 11 "D:\dotNET\CRM-2021\BlazorCRM\Shared\NavMenu.razor"
+#line 12 "D:\dotNET\CRM-2021\BlazorCRM\Shared\NavMenu.razor"
        
 	private bool _collapseNavMenu = false;
 

@@ -91,13 +91,6 @@ using BlazorCRM.Models;
 #nullable disable
 #nullable restore
 #line 3 "D:\dotNET\CRM-2021\BlazorCRM\Pages\Users.razor"
-using Microsoft.EntityFrameworkCore;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 4 "D:\dotNET\CRM-2021\BlazorCRM\Pages\Users.razor"
 using BlazorCRM.Services;
 
 #line default
@@ -112,24 +105,25 @@ using BlazorCRM.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 40 "D:\dotNET\CRM-2021\BlazorCRM\Pages\Users.razor"
+#line 63 "D:\dotNET\CRM-2021\BlazorCRM\Pages\Users.razor"
        
 
 	private List<User> _users;
-	public bool IsLoading = true;
+	private bool _isLoading = true;
 
 	protected override async Task OnInitializedAsync()
 	{
-		await using var context = DataContext.CreateDbContext();
-		_users = await context.Users.ToListAsync();
-		IsLoading = false;
+		_isLoading = true;
+	// _users = await UserService.GetUsers();
+		_users = await UserService.GetUsersDapper();
+		_isLoading = false;
 	}
 
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IDbContextFactory<DataContext> DataContext { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserService UserService { get; set; }
     }
 }
 #pragma warning restore 1591

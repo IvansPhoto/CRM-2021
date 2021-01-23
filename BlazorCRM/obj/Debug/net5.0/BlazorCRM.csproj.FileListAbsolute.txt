@@ -111,3 +111,7 @@ D:\dotNET\CRM-2021\BlazorCRM\obj\Debug\net5.0\scopedcss\Pages\Users.razor.rz.scp
 D:\dotNET\CRM-2021\BlazorCRM\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
 D:\dotNET\CRM-2021\BlazorCRM\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
 D:\dotNET\CRM-2021\BlazorCRM\obj\Debug\net5.0\scopedcss\Pages\Objectives.razor.rz.scp.css
+D:\dotNET\CRM-2021\BlazorCRM\bin\Debug\net5.0\Dapper.dll
+D:\dotNET\CRM-2021\BlazorCRM\obj\Debug\net5.0\RazorDeclaration\Pages\UserPage.razor.g.cs
+D:\dotNET\CRM-2021\BlazorCRM\obj\Debug\net5.0\Razor\Pages\UserPage.razor.g.cs
+D:\dotNET\CRM-2021\BlazorCRM\obj\Debug\net5.0\scopedcss\Pages\UserPage.razor.rz.scp.css

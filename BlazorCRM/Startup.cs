@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorCRM.Data;
 using BlazorCRM.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,7 @@ namespace BlazorCRM
 			services.AddDbContextFactory<DataContext>(builder => builder.UseSqlite(Configuration.GetConnectionString("SQLite")));
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
+			services.AddScoped<IDapperRepo, DapperRepo>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<ICompanyService, CompanyService>();
 			services.AddScoped<IObjectiveService, ObjectiveService>();

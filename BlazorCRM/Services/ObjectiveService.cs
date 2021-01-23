@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorCRM.Data;
 using BlazorCRM.Models;
 using Microsoft.EntityFrameworkCore;
 
