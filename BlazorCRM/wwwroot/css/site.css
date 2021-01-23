@@ -33,6 +33,7 @@ h3 {
 }
 
 p, a {
+    all: unset;
     font-size: 1.5rem;
 }
 

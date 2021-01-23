@@ -9,5 +9,6 @@
 main[b-pkfdbk1gz6] {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
 

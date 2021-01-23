@@ -15,7 +15,7 @@ namespace BlazorCRM.Services
 			_dbContextFactory = dbContextFactory;
 		}
 
-		public Objective? NewObjective { get; set; } = new(title: "Call") {Description = "Call to"};
+		public Objective? NewObjective { get; set; } = new(title: string.Empty);
 
 		public async Task<List<Objective>> GetObjectives()
 		{
@@ -38,13 +38,15 @@ namespace BlazorCRM.Services
 				.ToListAsync();
 		}
 
-		public async Task<Objective?> SaveObjective(Objective objective)
+		public async Task<int> SaveObjective(Objective objective)
 		{
 			await using var context = _dbContextFactory.CreateDbContext();
-			// return context.Objectives.FromSqlInterpolated(
-			// 	$"INSERT INTO Objectives (Title, Description, CreateDate, FinishDate, IsFinished, ObjectType, ResponsibleUserId) VALUES ({objective.Title}, {objective.Description}, {objective.CreateDate}, {objective.FinishDate}, {objective.IsFinished}, {objective.ObjectType}, {objective.ResponsibleUser.Id})");
-			var newObjective = await context.Objectives.AddAsync(objective);
-			return await context.SaveChangesAsync() > 0 ? newObjective.Entity : null;
+			return await context.Database.ExecuteSqlRawAsync(
+				"INSERT INTO Objectives (Title, Description, CreateDate, FinishDate, IsFinished, ObjectType, ResponsibleUserId, CompanyId, EmployeeId) VALUES ({0},{1},{2},{3},{4},{5},{6},{7},{8})",
+				objective.Title, objective.Description, objective.CreateDate, objective.FinishDate, objective.IsFinished, objective.ObjectType,
+				objective.ResponsibleUser == null ? null : objective.ResponsibleUser.Id, objective.Company == null ? null : objective.Employee.Id, objective.Employee == null ? null : objective.Employee.Id);
+			// var newObjective = await context.Objectives.AddAsync(objective);
+			// return await context.SaveChangesAsync() > 0 ? newObjective.Entity : null;
 		}
 	}
 
@@ -53,6 +55,6 @@ namespace BlazorCRM.Services
 		public Objective? NewObjective { get; set; }
 		public Task<List<Objective>> GetObjectives();
 		public Task<List<Objective>> GetObjectives(long companyId);
-		public Task<Objective?> SaveObjective(Objective objective);
+		public Task<int> SaveObjective(Objective objective);
 	}
 }
