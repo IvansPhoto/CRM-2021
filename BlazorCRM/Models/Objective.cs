@@ -6,7 +6,7 @@ namespace BlazorCRM.Models
 	public class Objective
 	{
 		public long Id { get; set; }
-		public string Title { get; set; }
+		public string Title { get; set; } = string.Empty;
 		public string Description { get; set; } = string.Empty;
 		public bool IsFinished { get; set; } = false;
 		public DateTime CreateDate { get; set; } = new DateTime(DateTime.UtcNow.ToLocalTime().Ticks);
@@ -31,7 +31,11 @@ namespace BlazorCRM.Models
 			Message,
 			Demonstration
 		}
-		
+
+		public Objective()
+		{
+		}
+
 		public Objective(string title)
 		{
 			Title = title;

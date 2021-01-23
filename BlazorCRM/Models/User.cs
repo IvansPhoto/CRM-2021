@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using BlazorCRM.Pages;
 using WebREST_EF_50.Assistants;
 
 namespace BlazorCRM.Models
@@ -20,6 +21,18 @@ namespace BlazorCRM.Models
 
 		public User()
 		{
+		}
+
+		public class Full : User
+		{
+			public List<Objectives> Objectives { get; set; } = new();
+			public List<Project> Projects { get; set; } = new();
+			public List<Company> Companies { get; set; } = new();
+			public List<Employee> Employees { get; set; } = new();
+
+			public Full()
+			{
+			}
 		}
 
 		/// <summary>

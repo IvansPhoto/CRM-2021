@@ -16,7 +16,7 @@ namespace BlazorCRM.Services
 			_dbContextFactory = dbContextFactory;
 		}
 
-		public Company? NewCompany { get; set; } = new(name: string.Empty);
+		public Company? NewCompany { get; set; } = new();
 
 		public async Task<List<Company>> GetCompanies()
 		{
