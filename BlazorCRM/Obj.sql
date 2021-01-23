@@ -1,0 +1,1 @@
+﻿INSERT INTO Objectives (Title, Description, CreateDate, FinishDate, IsFinished, ObjectType, ResponsibleUserId, CompanyId, EmployeeId) VALUES (@p0,@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8)

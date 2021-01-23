@@ -1,0 +1,44 @@
+﻿@page "/UserPage"
+@using BlazorCRM.Models
+@using BlazorCRM.Services
+@using BlazorCRM.Data
+@inject IUserService UserService;
+
+<h3>UserPage</h3>
+<div id="UserPage">
+	<p>Id: @_user.Id</p>
+	<p>Name: @_user.Name</p>
+	<p>Surname: @_user.Surname</p>
+	@if (_user.Phones.Count == 0)
+	{
+		<p>No phone for the user</p>
+	}
+	else
+	{
+		@foreach (var phone in _user.Phones)
+		{
+			<p>@phone.Id: @phone.PhoneNumber</p>
+		}
+	}
+	@if (_user.Emails.Count == 0)
+	{
+		<p>No phone for the user</p>
+	}
+	else
+	{
+		@foreach (var email in _user.Emails)
+		{
+			<p>@email.Id: @email.EmailAddress</p>
+		}
+	}
+</div>
+
+@code {
+	private User _user;
+
+	protected override async Task OnInitializedAsync()
+	{
+		_user = await UserService.GetUser(1);
+	}
+
+}

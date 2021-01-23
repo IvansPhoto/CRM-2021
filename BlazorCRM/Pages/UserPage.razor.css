@@ -1,0 +1,4 @@
+﻿#UserPage {
+    display: flex;
+    flex-direction: column;
+}
