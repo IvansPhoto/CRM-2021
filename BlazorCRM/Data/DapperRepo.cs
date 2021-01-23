@@ -53,6 +53,14 @@ namespace BlazorCRM.Data
 			return result;
 		}
 
+		public async Task<T> SingleOneMany<T, T1, T2, TP>(string sqlQuery, TP parameters, string connectionString, Func<T, T1, T2, T> map, string? split)
+		{
+			await using var connection = new SqliteConnection(connectionString);
+			var dictionary = new Dictionary<int, T>();
+			var result = await connection.QueryFirstOrDefaultAsync<T>(sql: sqlQuery, param: parameters);
+			return result;
+		}
+
 		public async Task<int> SaveData<T>(string sqlQuery, T parameters, string connectionString)
 		{
 			await using var connection = new SqliteConnection(connectionString);
