@@ -118,7 +118,7 @@ using BlazorCRM.Data;
 
 	protected override async Task OnInitializedAsync()
 	{
-		_user = await UserService.GetUser(1);
+		_user = await UserService.GetOneUser(1);
 	}
 
 
