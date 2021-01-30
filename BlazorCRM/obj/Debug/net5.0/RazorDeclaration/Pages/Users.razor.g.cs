@@ -115,7 +115,7 @@ using BlazorCRM.Services;
 	{
 		_isLoading = true;
 	// _users = await UserService.GetUsers();
-		_users = await UserService.GetUsersDapper();
+		_users = await UserService.GetListUsers();
 		_isLoading = false;
 	}
 
